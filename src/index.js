@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { Provider } from 'react-redux';
-import store from './store';
+
 
 import App from './components/App';
 // import './styles/main.scss';
 
 ReactDOM.render(
   <AppContainer>
-		<Provider store={store}>
 			<App />
-		</Provider>
 	</AppContainer>,
 	document.getElementById('container')
 );
@@ -23,9 +20,7 @@ if (module.hot) {
 		const NextApp = require('./components/App.jsx').default;
 		ReactDOM.render(
 			<AppContainer>
-				<Provider store={store}>
 					<NextApp/>
-				</Provider>
 			</AppContainer>,
 			document.getElementById('main')
 		);
