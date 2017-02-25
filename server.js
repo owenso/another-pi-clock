@@ -1,6 +1,6 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'local';
 
-var express = require('./config/express');
+var express = require('./server/config/express');
 
 var app = express();
 
