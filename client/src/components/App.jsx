@@ -1,18 +1,45 @@
 import React, {Component} from 'react';
 import Clock from './Clock/Clock'
 import Weather from './Weather/Weather'
+import moment from 'moment';
 
-export default class App extends Component {
+class App extends Component {
+  	constructor(props) {
+		super(props);
+        this.state = {
+            currentTime:moment()
+        }
+	}
+
+	componentWillMount() {
+        this.ticTock()
+	}
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId);
+    }
+
+    ticTock () {
+        const clock = setInterval(()=>{this.setState({currentTime:moment()})}, 1000)
+        this.setState({intervalId:clock});
+    }
   render() {
     return (
-      <div className="row">
-        <div className="col-sm-4">
-          <Clock />
+      <div>
+        <div className="row">
+          <div className="col-sm-6">
+            <Clock currentTime={this.state.currentTime} />
+          </div>
+          <div className="col-sm-8"></div>
         </div>
-        <div className="col-sm-8">
-          <Weather />
+        <br/>
+        <div className="row attach-bottom">
+          <div className="col-sm-7">
+            <Weather currentTime={this.state.currentTime}/>
+          </div>
         </div>
       </div>
     );
   }
 }
+export default App;

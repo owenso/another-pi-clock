@@ -1,7 +1,13 @@
-body{
+html,body{
     background: #2F4858;
-    color:white;
+    color:#E2E2E2;
+    height:100%;
 }
+
+body{
+    padding:1em;
+}
+
 p,
 span,
 h1,
@@ -13,9 +19,18 @@ h6,
 label,
 li {
 	font-weight: 100;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family:  'Didact Gothic', Helvetica, Arial, sans-serif;
+}
+
+.attach-bottom{
+    position:fixed;
+    bottom:1em;
+    left:1em;
 }
 
 @import 'components/_clock.scss';
 @import 'components/_weather.scss';
-@import 'weatherIcons/_weatherIcons.scss'
+@import 'weatherIcons/_weatherIcons.scss';
+@import 'components/_sunriseSunset.scss';
+@import 'components/todaysWeather.scss';
+@import 'components/dayWeather.scss';

@@ -22,7 +22,7 @@ if (module.hot) {
 			<AppContainer>
 					<NextApp/>
 			</AppContainer>,
-			document.getElementById('main')
+			document.getElementById('container')
 		);
 	});
 }
