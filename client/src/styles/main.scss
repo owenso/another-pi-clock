@@ -1,0 +1,21 @@
+body{
+    background: #2F4858;
+    color:white;
+}
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+li {
+	font-weight: 100;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+@import 'components/_clock.scss';
+@import 'components/_weather.scss';
+@import 'weatherIcons/_weatherIcons.scss'
