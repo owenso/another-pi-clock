@@ -38,6 +38,7 @@ module.exports = function() {
     });
 
     require("../routes/weather.js")(app);
+    require("../routes/alarms.js")(app);
 
     return app;
 };

@@ -5,8 +5,8 @@ class Clock extends Component {
 	render() {
         return (
             <div className="clock">
-                <h1>{this.props.currentTime.format('h:mm A')}</h1>
-                <h4>{this.props.currentTime.format('ddd D MMM')}</h4>
+                <h1 className="pull-right">{this.props.currentTime.format('h:mm A')}</h1>
+                <h2 className="pull-right">{this.props.currentTime.format('dddd D MMMM')}</h2>
             </div>
             )
 	}

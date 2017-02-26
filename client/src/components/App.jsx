@@ -27,10 +27,10 @@ class App extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-sm-7">
             <Clock currentTime={this.state.currentTime} />
           </div>
-          <div className="col-sm-8"></div>
+          <div className="col-sm-5"></div>
         </div>
         <br/>
         <div className="row attach-bottom">

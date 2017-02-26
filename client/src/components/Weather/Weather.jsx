@@ -115,7 +115,6 @@ class Weather extends Component {
                 />
                 <div className="col-sm-3">
                     <TodaysWeather
-                    currentTime={this.props.currentTime}
                     currentSummary={this.state.currentSummary}
                     currentIcon={this.state.currentIcon}
                     currentTemperature={this.state.currentTemperature}
