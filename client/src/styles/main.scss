@@ -29,9 +29,11 @@ li {
     width:100%;
 }
 
-@import 'components/_clock.scss';
-@import 'components/_weather.scss';
-@import 'weatherIcons/_weatherIcons.scss';
-@import 'components/_sunriseSunset.scss';
+@import 'weatherIcons/weatherIcons.scss';
+@import 'components/clock.scss';
+@import 'components/weather.scss';
+@import 'components/sunriseSunset.scss';
 @import 'components/todaysWeather.scss';
 @import 'components/dayWeather.scss';
+@import 'components/hourlyForecast.scss';
+@import 'components/hourlyEntry.scss';

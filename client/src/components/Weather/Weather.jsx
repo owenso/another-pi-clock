@@ -4,12 +4,15 @@ import moment from 'moment';
 import SunriseSunset from './SunriseSunset.jsx';
 import TodaysWeather from './TodaysWeather.jsx'
 import DayWeather from './DayWeather.jsx';
+import HourlyForecast from './HourlyForecast.jsx';
 
 class Weather extends Component {
 	constructor(props) {
 		super(props);
         this.state = {
+            showHourly:false
         }
+        this.toggleHourly.bind(this);
 	}
 
 	componentWillMount() {
@@ -54,6 +57,8 @@ class Weather extends Component {
                 todayLowTime:moment.unix(result.data.daily.data[0].temperatureMinTime),
                 todayFeelsLikeHigh:result.data.daily.data[0].apparentTemperatureMax,
                 todayFeelsLikeLow:result.data.daily.data[0].apparentTemperatureMin,
+                todayHourlySummary:result.data.hourly.summary,
+                todayHourArray:result.data.hourly.data,
                 nextHourSummary:result.data.minutely.summary,
                 nextHourDataArray:result.data.minutely.data,
                 weekSummary:result.data.daily.summary,
@@ -103,7 +108,75 @@ class Weather extends Component {
             console.error(err.stack);
          });
     }
-
+    toggleHourly(){
+        console.log('toggling hourly')
+        this.setState({showHourly:!this.state.showHourly});
+        console.log(this.state.showHourly)
+    }
+    hourlyOrDays(){
+        if (this.state.showHourly){
+            return <HourlyForecast
+                    summary={this.state.todayHourlySummary}
+                    data={this.state.todayHourArray}
+                    />
+        }else {
+            return (
+                <div className="col-sm-9">
+                    <div className="col-sm-4">
+                        <DayWeather
+                        summary={this.state.tomorrowSummary}
+                        icon={this.state.tomorrowIcon}
+                        precipType={this.state.tomorrowPrecipType}
+                        precipProbability={this.state.tomorrowPrecipProbability}
+                        high={this.state.tomorrowHigh}
+                        highTime={this.state.tomorrowHighTime}
+                        low={this.state.tomorrowLow}
+                        lowTime={this.state.tomorrowLowTime}
+                        feelsLikeHigh={this.state.tomorrowFeelsLikeHigh}
+                        feelsLikeLow={this.state.tomorrowFeelsLikeLow}
+                        sunriseTime={this.state.tomorrowSunriseTime}
+                        sunsetTime={this.state.tomorrowSunsetTime}
+                        timestamp={this.state.tomorrowTimeStamp}
+                        />
+                    </div>
+                    <div className="col-sm-4">
+                        <DayWeather
+                        summary={this.state.overmorrowSummary}
+                        icon={this.state.overmorrowIcon}
+                        precipType={this.state.overmorrowPrecipType}
+                        precipProbability={this.state.overmorrowPrecipProbability}
+                        high={this.state.overmorrowHigh}
+                        highTime={this.state.overmorrowHighTime}
+                        low={this.state.overmorrowLow}
+                        lowTime={this.state.overmorrowLowTime}
+                        feelsLikeHigh={this.state.overmorrowFeelsLikeHigh}
+                        feelsLikeLow={this.state.overmorrowFeelsLikeLow}
+                        sunriseTime={this.state.overmorrowSunriseTime}
+                        sunsetTime={this.state.overmorrowSunsetTime}
+                        timestamp={this.state.overmorrowTimeStamp}
+                        />
+                    </div>
+                    <div className="col-sm-4">
+                        <DayWeather
+                        summary={this.state.thirdDaySummary}
+                        icon={this.state.thirdDayIcon}
+                        precipType={this.state.thirdDayPrecipType}
+                        precipProbability={this.state.thirdDayPrecipProbability}
+                        high={this.state.thirdDayHigh}
+                        highTime={this.state.thirdDayHighTime}
+                        low={this.state.thirdDayLow}
+                        lowTime={this.state.thirdDayLowTime}
+                        feelsLikeHigh={this.state.thirdDayFeelsLikeHigh}
+                        feelsLikeLow={this.state.thirdDayFeelsLikeLow}
+                        sunriseTime={this.state.thirdDaySunriseTime}
+                        sunsetTime={this.state.thirdDaySunsetTime}
+                        timestamp={this.state.thirdDayTimeStamp}
+                        />
+                    </div>
+                </div>
+            )
+        }
+    }
 	render() {
         return (
             <div className="weather">
@@ -113,7 +186,7 @@ class Weather extends Component {
                 sunriseTime={this.state.sunriseTime}
                 sunsetTime={this.state.sunsetTime}
                 />
-                <div className="col-sm-3">
+                <div className="col-sm-3" onClick={()=>{this.toggleHourly()}}>
                     <TodaysWeather
                     currentSummary={this.state.currentSummary}
                     currentIcon={this.state.currentIcon}
@@ -131,57 +204,7 @@ class Weather extends Component {
                     nextHourDataArray={this.state.nextHourDataArray}
                     />
                 </div>
-                <div className="col-sm-3">
-                    <DayWeather
-                    summary={this.state.tomorrowSummary}
-                    icon={this.state.tomorrowIcon}
-                    precipType={this.state.tomorrowPrecipType}
-                    precipProbability={this.state.tomorrowPrecipProbability}
-                    high={this.state.tomorrowHigh}
-                    highTime={this.state.tomorrowHighTime}
-                    low={this.state.tomorrowLow}
-                    lowTime={this.state.tomorrowLowTime}
-                    feelsLikeHigh={this.state.tomorrowFeelsLikeHigh}
-                    feelsLikeLow={this.state.tomorrowFeelsLikeLow}
-                    sunriseTime={this.state.tomorrowSunriseTime}
-                    sunsetTime={this.state.tomorrowSunsetTime}
-                    timestamp={this.state.tomorrowTimeStamp}
-                    />
-                </div>
-                <div className="col-sm-3">
-                    <DayWeather
-                    summary={this.state.overmorrowSummary}
-                    icon={this.state.overmorrowIcon}
-                    precipType={this.state.overmorrowPrecipType}
-                    precipProbability={this.state.overmorrowPrecipProbability}
-                    high={this.state.overmorrowHigh}
-                    highTime={this.state.overmorrowHighTime}
-                    low={this.state.overmorrowLow}
-                    lowTime={this.state.overmorrowLowTime}
-                    feelsLikeHigh={this.state.overmorrowFeelsLikeHigh}
-                    feelsLikeLow={this.state.overmorrowFeelsLikeLow}
-                    sunriseTime={this.state.overmorrowSunriseTime}
-                    sunsetTime={this.state.overmorrowSunsetTime}
-                    timestamp={this.state.overmorrowTimeStamp}
-                    />
-                </div>
-                <div className="col-sm-3">
-                    <DayWeather
-                    summary={this.state.thirdDaySummary}
-                    icon={this.state.thirdDayIcon}
-                    precipType={this.state.thirdDayPrecipType}
-                    precipProbability={this.state.thirdDayPrecipProbability}
-                    high={this.state.thirdDayHigh}
-                    highTime={this.state.thirdDayHighTime}
-                    low={this.state.thirdDayLow}
-                    lowTime={this.state.thirdDayLowTime}
-                    feelsLikeHigh={this.state.thirdDayFeelsLikeHigh}
-                    feelsLikeLow={this.state.thirdDayFeelsLikeLow}
-                    sunriseTime={this.state.thirdDaySunriseTime}
-                    sunsetTime={this.state.thirdDaySunsetTime}
-                    timestamp={this.state.thirdDayTimeStamp}
-                    />
-                </div>
+                {this.hourlyOrDays()}
             </div>
         )
 	}

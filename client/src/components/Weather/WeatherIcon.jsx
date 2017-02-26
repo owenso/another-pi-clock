@@ -8,8 +8,10 @@ import Sun from './icons/Sun.jsx'
 import SunFill from './icons/SunFill.jsx'
 import Moon from './icons/Moon.jsx'
 import MoonFill from './icons/MoonFill.jsx'
+import CloudDrizzleFill from './icons/CloudDrizzleFill.jsx';
 import CloudDrizzleSun from './icons/CloudDrizzleSun.jsx'
 import CloudDrizzleMoon from './icons/CloudDrizzleMoon.jsx'
+import CloudLightRainFill from './icons/CloudRainAltFill.jsx'
 import CloudLightRainSun from './icons/CloudRainSunAlt.jsx'
 import CloudLightRainMoon from './icons/CloudRainMoonAlt.jsx'
 import CloudDrizzleSunFill from './icons/CloudDrizzleSunFill.jsx'
@@ -30,31 +32,31 @@ class WeatherIcon extends Component {
 	}
 
     currentWeatherIcon(){
-        const { currentIcon, summary, sunriseTime, sunsetTime } = this.props;
+        const { currentIcon, currentSummary, sunriseTime, sunsetTime } = this.props;
         const isDaytime =  moment().isBetween(sunriseTime, sunsetTime, 'second', [])
-        switch (currentIcon) {
-            case "partly-cloudy-day":
-            return <CloudSunFill />
-            case "partly-cloudy-night":
-            return <CloudMoonFill />
-            case "clear-day":
-            return <Sun />
-            case "clear-night":
-            return <Moon />
-            case "rain" && summary==="Drizzle" && isDaytime:
-            return <CloudDrizzleSunFill />
-            case "rain" && summary==="Drizzle":
-            return <CloudDrizzleMoonFill />
-            case "rain" && summary==="Light Rain" && isDaytime:
-            return <CloudLightRainSunFill />
-            case "rain" && summary==="Light Rain":
-            return <CloudLightRainMoonFill />
-            case "rain":
-            return <CloudRainFill />
-            case "cloudy":
-            return <CloudFill />
-            default:
-            return <p>{currentIcon}</p>
+        if (currentIcon && currentSummary){
+            switch (currentIcon) {
+                case "partly-cloudy-day":
+                return <CloudSunFill />
+                case "partly-cloudy-night":
+                return <CloudMoonFill />
+                case "clear-day":
+                return <Sun />
+                case "clear-night":
+                return <Moon />
+                case "rain":
+                    if (currentSummary.includes("Light")){
+                        return <CloudDrizzleFill />
+                    } else if (currentSummary.includes('Drizzle')){
+                        return <CloudLightRainFill />
+                    } else {
+                        return <CloudRainFill />
+                    }
+                case "cloudy":
+                return <CloudFill />
+                default:
+                return <p>{currentIcon}</p>
+            }
         }
     }
 
