@@ -1,1 +1,1 @@
-# react-node-webpack-starter
+# Yet another Raspberry PI Clock/Weather Thing
